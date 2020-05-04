@@ -17,7 +17,7 @@ public class JobScheduler {
 
     //programando para o job ser executado a cada 3 min
 //    @Scheduled(cron="0/10 * * 1/1 * ?")
-//    @Scheduled(cron="0 */1 * 1/1 * ?")
+    @Scheduled(cron="0 */1 * 1/1 * ?")
     public void jobScheduled(){
         System.out.println("Job sheduler executado as " + LocalTime.now().getHour() + "hrs " + LocalTime.now().getMinute() + "min");
         jobRunner.runBatchJob();
