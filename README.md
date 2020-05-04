@@ -22,7 +22,7 @@ Passo a passo de execução para que o microsserviço fique em execução e disp
 - Realizar o clone do projeto (inserir seu usuário):
 
 ```
-git clone https://gitlab.com/regisflorentino/springstack.git
+https://github.com/velkanknight/banckend-spring.git
 ```
 
 - Acessar a pasta para realizar o build do projeto:
@@ -36,7 +36,7 @@ mvn clean install
 - Acessar diretório para executar a aplicação:
 
 ```
-cd springstack
+cd banckend-spring
 ```
 
 - Subir a aplicação:
@@ -66,34 +66,33 @@ mvn spring-boot:run
 
 - [Segunda opção]: `sudo docker run -d --restart always --hostname localhost  --name rabbitmq -p 15672:15672 -p 5672:5672 rabbitmq:3-management`
 
-## Mysql
+## Postgres
 
 ### Instalação via docker-compose
 
 1 - Crie um arquivo docker-compose.yml com o conteúdo:
 
-version: '2'
+# Use postgres/example user/password credentials
+#user: postgres pass: ''
+version: '3.1'
+
 services:
-  mysql_db:
-    image: mysql:latest
-    volumes:
-      - "./.mysql-data/db:/var/lib/mysql"
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=secrect
+      - POSTGRES_USER=postgres
+
+  adminer:
+    image: adminer
     restart: always
     ports:
-      - 3306:3306
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: testedb
-      MYSQL_USER: user
-      MYSQL_PASSWORD: user
+      - 8082:8080
 
 2 - Execute sudo docker-compose up -d no mesmo diretório que se localiza o arquivo. 
 	Será feito o download da imagem do docker e será inicializada. 
-
-### Acessar Mysql
-
-    Voce pode acessar o mysql via temrinal, mas sugiro que baixa o my-workbench, instale e aponte para o seu localhost:3306
-    Crie o banco testedb para que seja criada a tabela e relizado a persistencia
 
 
 ## Swagger
